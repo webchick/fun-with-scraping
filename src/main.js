@@ -5,7 +5,9 @@ const crawler = new CheerioCrawler({
     async requestHandler({ $, request }) {
         const title = $('title').text();
         console.log(`The title of "${request.url}" is: ${title}.`);
-    }
+    },
+    // Be kind.
+    maxRequestsPerCrawl: 20,
 })
 
 // Start the crawler with the provided URLs
