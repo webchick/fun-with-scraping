@@ -1,19 +1,17 @@
-// Instead of CheerioCrawler let's use Playwright
-// to be able to render JavaScript.
 import { PlaywrightCrawler } from 'crawlee';
 
 const crawler = new PlaywrightCrawler({
-    requestHandler: async ({ page }) => {
-        // Wait for the actor cards to render.
+    requestHandler: async ({ page, request, enqueueLinks }) => {
+        console.log(`Processing: ${request.url}`);
+        // Wait for the category cards to render,
+        // otherwise enqueueLinks wouldn't enqueue anything.
         await page.waitForSelector('.collection-block-item');
-        // Execute a function in the browser which targets
-        // the actor card elements and allows their manipulation.
-        const categoryTexts = await page.$$eval('.collection-block-item', (els) => {
-            // Extract text content from the actor cards
-            return els.map((el) => el.textContent);
-        });
-        categoryTexts.forEach((text, i) => {
-            console.log(`CATEGORY_${i + 1}: ${text}\n`);
+
+        // Add links to the queue, but only from
+        // elements matching the provided selector.
+        await enqueueLinks({
+            selector: '.collection-block-item',
+            label: 'CATEGORY',
         });
     },
 });
