@@ -1,8 +1,64 @@
-# Crawlee + JavaScript empty project
+# Scraping Shiny Occasions
 
-This template is a production ready boilerplate for developing with Crawlee. Use this to bootstrap your projects using the most up-to-date code.
+Here are some notes:
 
-If you're looking for examples or want to learn more visit:
+- Seems JS is required for basic functionality => Playwright.
 
-- [Quick Start](https://crawlee.dev/docs/quick-start)
-- [Examples](https://crawlee.dev/docs/examples)
+- URL structure:
+  - **Location**:
+    - City: `/d/COUNTRY--CITY/all-events/` (e.g. /d/canada--vancouver/all-events/)
+    - Online: `/d/online/all-events/`
+  - **Pagination**: `?page=X` (e.g. /d/canada--vancouver/all-events/?page=19)
+  - **Format**: `/TYPE/` (e.g. /d/canada--vancouver/classes/)
+    - Valid formats:
+      - classes
+      - conferences
+      - festivals
+      - parties
+      - appearances
+      - attractions
+      - conventions
+      - expos
+      - galas
+      - games
+      - networking
+      - performances
+      - races
+      - rallies
+      - retreats
+      - screenings
+      - seminars
+      - tournaments
+      - tours
+  - **Category**: `/CATEGORY--events/` (e.g. /d/canada--vancouver/food-and-drink--events/?page=2)
+    - Categories are:
+      - business
+      - food-and-drink
+      - health
+      - music
+      - auto-boat-and-air
+      - charity-and-causes
+      - community
+      - family-and-education
+      - fashion
+      - film-and-media
+      - hobbies
+      - home-and-lifestyle
+      - arts
+      - government
+      - spirituality
+      - school-activities
+      - science-and-tech
+      - holiday
+      - sports-and-fitness
+      - travel-and-outdoor
+      - other
+  - **Date**: `&start_date=YYYY-MM-DD&end_date=YYYY-MM-DD` (e.g. /d/canada--vancouver/all-events/?page=1&start_date=2025-01-06&end_date=2025-01-09)
+    - Also a few special URL-based filters:
+      - `/events--today/` (e.g. /d/canada--vancouver/events--today/)
+      - `/events--tomorrow/` (e.g. /d/canada--vancouver/events--tomorrow/)
+      - `/events--this-weekend/` (e.g. /d/canada--vancouver/events--this-weekend/)
+      - Note: If also filtering by a category, this precedes "events", e.g. /d/canada--vancouver/business--events--this-weekend/?page=1)
+ - **Free vs. Paid**
+    - `/free--events/` (e.g. /d/canada--vancouver/free--events/)
+    - `/paid--events/` (e.g. /d/canada--vancouver/paid--events/?page=1)
